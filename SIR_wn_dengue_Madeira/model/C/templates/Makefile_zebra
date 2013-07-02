@@ -1,0 +1,56 @@
+CC=gcc
+CXX=g++
+CFLAGS=-Wall -O3 -DGSL_RANGE_CHECK_OFF -mmacosx-version-min=10.7
+LDFLAGS=-lplom -lplomtpl -lm /Users/team/plom-build/darwin/lib/libgsl.a /Users/team/plom-build/darwin/lib/libgslcblas.a /Users/team/plom-build/darwin/lib/libjansson.a /Users/team/plom-build/darwin/lib/libzmq.a
+LIB=libplomtpl.a
+SRC= $(wildcard *.c)
+OBJ= $(SRC:.c=.o)
+LIBDIR=../lib
+
+EXEC=simul simplex smc mif pmcmc kalman ksimplex kmcmc worker
+
+all: $(LIB)
+
+install: $(EXEC)
+	mv $(EXEC) ../../
+
+$(LIB): $(OBJ)
+	ar -rcs $@ $(OBJ)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+simul: libplomtpl.a
+	$(CXX) $(CFLAGS) -L. -o $@ -lplom_simul $(LDFLAGS)
+
+simplex: libplomtpl.a
+	$(CXX) $(CFLAGS) -L. -o $@ -lplom_simplex $(LDFLAGS)
+
+smc: libplomtpl.a
+	$(CXX) $(CFLAGS) -L. -o $@ -lplom_smc $(LDFLAGS) 
+
+mif: libplomtpl.a
+	$(CXX) $(CFLAGS) -L. -o $@ -lplom_mif $(LDFLAGS)  
+
+pmcmc: libplomtpl.a
+	$(CXX) $(CFLAGS) -L. -o $@ -lplom_pmcmc $(LDFLAGS)  
+
+kalman: libplomtpl.a
+	$(CXX) $(CFLAGS) -L. -o $@ -lplom_kalman $(LDFLAGS) 
+
+ksimplex: libplomtpl.a
+	$(CXX) $(CFLAGS) -L. -o $@ -lplom_ksimplex $(LDFLAGS)
+
+kmcmc: libplomtpl.a
+	$(CXX) $(CFLAGS) -L. -o $@ -lplom_kmcmc $(LDFLAGS)
+
+worker: libplomtpl.a
+	$(CXX) $(CFLAGS) -L. -o $@ -lplom_worker $(LDFLAGS) 
+
+.PHONY: clean
+
+clean:
+	rm *.o $(LIB)
+
+uninstall: clean
+	rm ../../{simul,simplex,smc,mif,pmcmc,kalman,ksimplex,kmcmc,worker}

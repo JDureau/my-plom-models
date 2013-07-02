@@ -1,0 +1,55 @@
+CC=gcc
+CFLAGS=-fopenmp -std=gnu99 -Wall -O3 -DGSL_RANGE_CHECK_OFF
+LDFLAGS=-lplom_web -lplomtpl_web -lm -lgsl -lgslcblas -ljansson -lzmq
+LIB=libplomtpl_web.a
+SRC= $(wildcard *.c)
+OBJ= $(SRC:.c=.o)
+LIBDIR=../lib
+
+EXEC=simul_web simplex_web smc_web mif_web pmcmc_web kalman_web ksimplex_web kmcmc_web worker_web
+
+all: $(LIB)
+
+install: $(EXEC)
+	mv $(EXEC) ../../
+
+$(LIB): $(OBJ)
+	ar -rcs $@ $(OBJ)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+simul_web: libplomtpl_web.a
+	$(CC) $(CFLAGS) -L. -o $@ -lplom_simul_web $(LDFLAGS)
+
+simplex_web: libplomtpl_web.a
+	$(CC) $(CFLAGS) -L. -o $@ -lplom_simplex_web $(LDFLAGS)
+
+smc_web: libplomtpl_web.a
+	$(CC) $(CFLAGS) -L. -o $@ -lplom_smc_web $(LDFLAGS) 
+
+mif_web: libplomtpl_web.a
+	$(CC) $(CFLAGS) -L. -o $@ -lplom_mif_web $(LDFLAGS)  
+
+pmcmc_web: libplomtpl_web.a
+	$(CC) $(CFLAGS) -L. -o $@ -lplom_pmcmc_web $(LDFLAGS)  
+
+kalman_web: libplomtpl_web.a
+	$(CC) $(CFLAGS) -L. -o $@ -lplom_kalman_web $(LDFLAGS) 
+
+ksimplex_web: libplomtpl_web.a
+	$(CC) $(CFLAGS) -L. -o $@ -lplom_ksimplex_web $(LDFLAGS)
+
+kmcmc_web: libplomtpl_web.a
+	$(CC) $(CFLAGS) -L. -o $@ -lplom_kmcmc_web $(LDFLAGS)
+
+worker_web: libplomtpl_web.a
+	$(CC) $(CFLAGS) -L. -o $@ -lplom_worker_web $(LDFLAGS) 
+
+.PHONY: clean
+
+clean:
+	rm *.o $(LIB)
+
+uninstall: clean
+	rm ../../{simul_web,simplex_web,smc_web,mif_web,pmcmc_web,kalman_web,ksimplex_web,kmcmc_web,worker_web}
