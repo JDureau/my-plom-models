@@ -1,0 +1,29 @@
+{
+  "name": "oBinomial",
+  "description": "my comment",
+
+  "observed": [
+    {
+      "id": "inc", "comment":"incidence measured at infection time",
+      "definition": [{"from":"S", "to": "I1"},{"from":"S", "to": "I2"},{"from":"S1", "to": "I12"},{"from":"S2", "to": "I21"}],
+      "time_series_id": ["Madeira__ecdc__inc"],
+      "observation_id": "common"
+    }
+  ],
+
+  "observation": [
+    {
+      "id": "common", 
+      "parameter": [
+        {"id": "rep", "comment": "reporting rate"},
+        {"id": "phi",  "comment": "over-dispertion"}
+      ],
+      "model": {
+        "distribution": "discretized_normal",
+        "mean": "rep*prop*x",
+        "var": "rep*(1.0-rep)*prop*x + (rep*phi*prop*x)**2"
+      }
+    }
+  ]
+
+}

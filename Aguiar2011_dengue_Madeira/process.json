@@ -1,0 +1,56 @@
+{
+ "name": "SIR",
+ "description": "2-strains model with cross-immunity period, immigration and seasonal forcing, inspired from Aguiar et al. 2011",
+
+ "state": [{"id": "S", "comment": "Susceptible"},
+  	    {"id": "I1", "comment": "Infected with strain 1", "tag": ["infectious"]},
+       	    {"id": "I2", "comment": "Infected with strain 2", "tag": ["infectious"]},
+       	    {"id": "R1", "comment": "Cross-immune period following infection with strain 1"},
+       	    {"id": "R2", "comment": "Cross-immune period following infection with strain 2"},
+       	    {"id": "S1", "comment": "Susceptible to strain 2 only"},
+       	    {"id": "S2", "comment": "Susceptible to strain 1 only"},
+       	    {"id": "I12", "comment": "Reinfected with strain 2 after strain 1", "tag": ["infectious"]},
+            {"id": "I21", "comment": "Reinfected with strain 1 after strain 2", "tag": ["infectious"]},
+	    {"id": "R", "comment": "Fully immune", "tag": ["remainder"]}
+	    ],
+
+  "parameter": [{"id": "beta",   "comment": "effective transmission rate"},
+                {"id": "psi",    "comment": "infectivity factor for individuals infected twice"},
+                {"id": "i",    "comment": "immigration"},
+		 {"id": "gamma",    "comment": "recovery rate"},
+		 {"id": "alpha",    "comment": "loss of cross immunity rate"},
+		{"id": "e",  "comment": "amplitude of seasonal forcing"},
+		{"id": "d",  "comment": "phase of seasonal forcing"},
+		{"id": "sto",  "comment": "noise amplitude"},
+                {"id": "mu_b", "comment": "birth rate"},
+                {"id": "mu_d", "comment": "death rate"}],
+
+
+ "model": [{"from": "U", "to": "S",  "rate": "mu_b*N", "comment":"birth"},
+            {"from": "S", "to": "I1",  "rate": "beta*(1+e*sin(2.0*M_PI*(t/ONE_YEAR + d)))*(I1/N+i+psi*I21/N)", "tag": ["transmission"], "comment":"infection with strain 1"},
+            {"from": "S", "to": "I2",  "rate": "beta*(1+e*sin(2.0*M_PI*(t/ONE_YEAR + d)))*(I2/N+i+psi*I12/N)", "tag": ["transmission"], "comment":"infection with strain 2"},
+            {"from": "I1", "to": "R1", "rate": "gamma", "comment":"recovery from strain 1"},
+            {"from": "I2", "to": "R2", "rate": "gamma", "comment":"recovery from strain 2"},
+            {"from": "R1", "to": "S1", "rate": "alpha", "comment":"loss of cross-immunity"},
+            {"from": "R2", "to": "S2", "rate": "alpha", "comment":"loss of cross-immunity"},
+	    {"from": "S1", "to": "I12",  "rate": "beta*(1+e*sin(2.0*M_PI*(t/ONE_YEAR + d)))*(I2/N+i+psi*I12/N)", "tag": ["transmission"], "comment":"infection with strain 2 after strain 1 "},
+ 	    {"from": "S2", "to": "I21",  "rate": "beta*(1+e*sin(2.0*M_PI*(t/ONE_YEAR + d)))*(I1/N+i+psi*I21/N)", "tag": ["transmission"], "comment":"infection with strain 1 after strain 2"},
+	    {"from": "I12", "to": "R", "rate": "gamma", "comment":"recovery from secondary infection"},
+            {"from": "I21", "to": "R", "rate": "gamma", "comment":"recovery from secondary infection"},
+            {"from": "S", "to": "U", "rate": "mu_d", "comment":"death"},
+            {"from": "I1", "to": "U", "rate": "mu_d", "comment":"death"},
+            {"from": "I2", "to": "U", "rate": "mu_d", "comment":"death"},
+            {"from": "R1", "to": "U", "rate": "mu_d", "comment":"death"},
+            {"from": "R2", "to": "U", "rate": "mu_d", "comment":"death"},
+            {"from": "S1", "to": "U", "rate": "mu_d", "comment":"death"},
+            {"from": "S2", "to": "U", "rate": "mu_d", "comment":"death"},
+            {"from": "I12", "to": "U", "rate": "mu_d", "comment":"death"},
+            {"from": "I21", "to": "U", "rate": "mu_d", "comment":"death"}],
+
+  "white_noise": [
+    {
+      "reaction": [{"from":"S", "to": "I1"},{"from":"S", "to": "I2"},{"from":"S1", "to": "I12"},{"from":"S2", "to": "I21"}],
+      "sd": "sto"
+    }
+  ]
+}
