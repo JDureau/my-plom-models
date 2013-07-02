@@ -1,0 +1,334 @@
+{
+  "name": "my_name",
+  "description": "my comment",
+  "parameter": {
+    "S": {
+      "partition_id": "variable_population",
+      "transformation": "logit",
+      "group": {
+        "London__all": {
+          "min": {
+            "value": 0.999998
+          },
+          "max": {
+            "value": 0.999998
+          },
+          "guess": {
+            "value": 0.999998
+          },
+          "sd_transf": {
+            "value": 0
+          },
+          "prior": {
+            "value": "uniform"
+          }
+        },
+        "Eyam__all": {
+          "min": {
+            "value": 0.997
+          },
+          "max": {
+            "value": 0.997
+          },
+          "guess": {
+            "value": 0.997
+          },
+          "sd_transf": {
+            "value": 0
+          },
+          "prior": {
+            "value": "uniform"
+          }
+        }
+      }
+    },
+    "I": {
+      "partition_id": "variable_population",
+      "transformation": "logit",
+      "group": {
+        "London__all": {
+          "min": {
+            "value": 0.000002
+          },
+          "max": {
+            "value": 0.000002
+          },
+          "guess": {
+            "value": 0.000002
+          },
+          "sd_transf": {
+            "value": 0
+          },
+          "prior": {
+            "value": "uniform"
+          }
+        },
+        "Eyam__all": {
+          "min": {
+            "value": 0.003
+          },
+          "max": {
+            "value": 0.003
+          },
+          "guess": {
+            "value": 0.003
+          },
+          "sd_transf": {
+            "value": 0
+          },
+          "prior": {
+            "value": "uniform"
+          }
+        }
+      }
+    },
+    "i": {
+      "partition_id": "variable_population",
+      "transformation": "logit",
+      "group": {
+        "London__all": {
+          "min": {
+            "value": 0
+          },
+          "max": {
+            "value": 0.00001
+          },
+          "guess": {
+            "value": 0.00000646433
+          },
+          "sd_transf": {
+            "value": 0.02
+          },
+          "prior": {
+            "value": "uniform"
+          }
+        },
+        "Eyam__all": {
+          "min": {
+            "value": 0
+          },
+          "max": {
+            "value": 0.015
+          },
+          "guess": {
+            "value": 0.000648836
+          },
+          "sd_transf": {
+            "value": 0.02
+          },
+          "prior": {
+            "value": "uniform"
+          }
+        }
+      }
+    },
+    "r0": {
+      "partition_id": "variable_population",
+      "transformation": "log",
+      "group": {
+        "London__all": {
+          "min": {
+            "value": 0
+          },
+          "guess": {
+            "value": 1.0297
+          },
+          "max": {
+            "value": 15
+          },
+          "sd_transf": {
+            "value": 0.02
+          },
+          "prior": {
+            "value": "uniform"
+          }
+        },
+        "Eyam__all": {
+          "min": {
+            "value": 0
+          },
+          "guess": {
+            "value": 0.965032
+          },
+          "max": {
+            "value": 15
+          },
+          "sd_transf": {
+            "value": 0.02
+          },
+          "prior": {
+            "value": "uniform"
+          }
+        }
+      }
+    },
+    "mu_d": {
+      "partition_id": "identical_population",
+      "transformation": "log",
+      "unit": "D",
+      "type": "rate_as_duration",
+      "group": {
+        "all": {
+          "min": {
+            "value": 1
+          },
+          "guess": {
+            "value": 1.0048
+          },
+          "max": {
+            "value": 10
+          },
+          "sd_transf": {
+            "value": 0.02
+          },
+          "prior": {
+            "value": "uniform"
+          }
+        }
+      }
+    },
+    "sto": {
+      "partition_id": "identical_population",
+      "transformation": "log",
+      "group": {
+        "all": {
+          "min": {
+            "value": 0.1
+          },
+          "guess": {
+            "value": 0.1
+          },
+          "max": {
+            "value": 0.1
+          },
+          "sd_transf": {
+            "value": 0
+          },
+          "prior": {
+            "value": "uniform"
+          }
+        }
+      }
+    },
+    "rep": {
+      "partition_id": "variable_time_series",
+      "transformation": "logit",
+      "group": {
+        "London__Creighton__inc": {
+          "min": {
+            "value": 0.05
+          },
+          "guess": {
+            "value": 1
+          },
+          "max": {
+            "value": 1
+          },
+          "sd_transf": {
+            "value": 0.02
+          },
+          "prior": {
+            "value": "uniform"
+          }
+        },
+        "Eyam__Kendall__inc": {
+          "min": {
+            "value": 0.05
+          },
+          "guess": {
+            "value": 0.662588
+          },
+          "max": {
+            "value": 1
+          },
+          "sd_transf": {
+            "value": 0.02
+          },
+          "prior": {
+            "value": "uniform"
+          }
+        }
+      }
+    },
+    "phi": {
+      "partition_id": "identical_time_series",
+      "transformation": "log",
+      "group": {
+        "all": {
+          "min": {
+            "value": 0.1
+          },
+          "guess": {
+            "value": 0.1
+          },
+          "max": {
+            "value": 0.1
+          },
+          "sd_transf": {
+            "value": 0
+          },
+          "prior": {
+            "value": "uniform"
+          }
+        }
+      }
+    }
+  },
+  "type": "theta",
+  "partition": {
+    "variable_population": {
+      "group": [
+        {
+          "id": "London__all",
+          "population_id": [
+            "London__all"
+          ]
+        },
+        {
+          "id": "Eyam__all",
+          "population_id": [
+            "Eyam__all"
+          ]
+        }
+      ]
+    },
+    "variable_time_series": {
+      "group": [
+        {
+          "id": "London__Creighton__inc",
+          "time_series_id": [
+            "London__Creighton__inc"
+          ]
+        },
+        {
+          "id": "Eyam__Kendall__inc",
+          "time_series_id": [
+            "Eyam__Kendall__inc"
+          ]
+        }
+      ]
+    },
+    "identical_population": {
+      "group": [
+        {
+          "id": "all",
+          "population_id": [
+            "London__all",
+            "Eyam__all"
+          ]
+        }
+      ]
+    },
+    "identical_time_series": {
+      "group": [
+        {
+          "id": "all",
+          "time_series_id": [
+            "London__Creighton__inc",
+            "Eyam__Kendall__inc"
+          ]
+        }
+      ]
+    }
+  }
+}
