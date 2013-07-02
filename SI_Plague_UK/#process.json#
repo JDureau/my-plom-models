@@ -1,0 +1,34 @@
+{
+  "name": "SIR",
+  "description": "SIR model with birth and death processes, and white noise on the transmission term",
+
+  "state": [
+    {"id": "S", "comment": "Susceptible"},
+    {"id": "E", "comment": "Exposed"},
+    {"id": "I", "comment": "Infectious", "tag": ["infectious"]},
+    {"id": "R", "comment": "Recovered", "tag": ["remainder"]}
+  ],
+
+  "parameter": [
+    {"id": "r0",   "comment": "basic reproduction number"},
+    {"id": "v",    "comment": "recovery rate"},
+    {"id": "sto",  "comment": "noise intensity"},
+    {"id": "mu_b", "comment": "birth rate"},
+    {"id": "mu_d", "comment": "death rate"}
+  ],
+
+  "model": [
+    {"from": "U", "to": "S",  "rate": "mu_b*N", "comment":"birth"},
+    {"from": "S", "to": "I", "rate": "r0/N*v*I", "tag": "transmission", "comment":"infection"},
+    {"from": "I", "to": "R", "rate": "correct_rate(v)", "comment":"recovery"},
+    {"from": "S", "to": "U",  "rate": "mu_d", "comment":"death"},
+    {"from": "I", "to": "U",  "rate": "mu_d", "comment":"death"}
+  ],
+
+  "white_noise": [
+    {
+      "reaction": [{"from":"S", "to": "I"}],
+      "sd": "sto"
+    }
+  ]
+}

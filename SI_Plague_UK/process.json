@@ -1,0 +1,27 @@
+{
+  "name": "SI",
+  "description": "SI model with white noise on the transmission term",
+
+  "state": [
+    {"id": "S", "comment": "Susceptible"},
+    {"id": "I", "comment": "Infectious", "tag": ["infectious"]}
+  ],
+
+  "parameter": [
+    {"id": "r0",   "comment": "basic reproduction number"},
+    {"id": "mu_d",    "comment": "death rate with plague"},
+    {"id": "sto",  "comment": "noise intensity"}
+  ],
+
+  "model": [
+    {"from": "S", "to": "I", "rate": "r0/(N+1)*mu_d*I", "tag": ["transmission"], "comment":"infection"},
+    {"from": "I", "to": "U", "rate": "correct_rate(mu_d)", "comment":"recovery"}
+  ],
+
+  "white_noise": [
+    {
+      "reaction": [{"from":"S", "to": "I"}],
+      "sd": "sto"
+    }
+  ]
+}

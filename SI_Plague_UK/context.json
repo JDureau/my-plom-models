@@ -1,0 +1,50 @@
+{
+  "name": "England",
+  "description": "Great Plague of 1665, in London and Eyam (Derbyshire)",
+
+  "disease": ["plague"],
+
+  "population": [
+    {
+      "id": "London__all",
+      "comment": "London, all age classes"
+    },
+    {
+      "id": "Eyam__all",
+      "comment": "Eyam, all age classes"
+    }
+  ],
+
+  "time_series": [
+    {
+      "id": "London__Creighton__inc",
+      "population_id": ["London__all"],
+      "comment": ""
+    },
+    {
+      "id": "Eyam__Kendall__inc",
+      "population_id": ["Eyam__all"],
+      "comment": ""
+    }
+  ],
+
+  "data": {
+      "source": "data/data.csv",
+      "t0": "1665-01-01",
+      "comment": "my data"
+  },
+
+  "metadata": [
+    {
+      "id": "N",
+      "source": "data/N.csv",
+      "comment": "Initial population sizes"
+    },
+    {
+      "id": "prop",
+      "source": "data/prop.csv",
+      "comment": "proportion of the population under surveillance"
+    }
+  ]
+
+}
