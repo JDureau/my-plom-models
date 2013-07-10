@@ -46,7 +46,7 @@
  */
 void build_psr(struct s_calc *p)
 {
-    unsigned int tab[N_PAR_SV+2]; 
+    unsigned int tab[4]; 
 
     /*automaticaly generated code: dimension of prob and inc*/
     
@@ -55,8 +55,8 @@ void build_psr(struct s_calc *p)
     tab[ORDER_U] = 2;
     tab[ORDER_R] = 1;
 
-    p->prob = init2d_var_set0(N_PAR_SV+2, tab);
-    p->inc = init3u_varp2_set0(N_PAR_SV+2, N_CAC, tab);
+    p->prob = init2d_var_set0(4, tab);
+    p->inc = init3u_varp2_set0(4, N_CAC, tab);
 
     //  p->gravity = init1d_set0(N_C);
 }

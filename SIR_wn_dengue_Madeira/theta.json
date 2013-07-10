@@ -55,9 +55,9 @@
     "sto": {
       "partition_id": "identical_population", 
       "transformation": "log",
-      "min": 0.1,
-      "guess": 0.1,
-      "max": 0.1,
+      "min": 0.2,
+      "guess": 0.2,
+      "max": 0.2,
       "sd_transf": 0.0
     },
     

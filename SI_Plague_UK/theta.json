@@ -38,40 +38,7 @@
       }
     },
     
-    "I": {
-      "partition_id": "variable_population",
-      "transformation": "logit",
-      "group": {
-        "London__all": {
-          "min": {
-            "value": 2e-6
-          },
-          "max": {
-            "value": 2e-6
-          },
-          "guess": {
-            "value": 2e-6
-          },
-          "sd_transf": {
-            "value": 0.0
-          }
-        },
-        "Eyam__all": {
-          "min": {
-            "value": 0.003
-          },
-          "max": {
-            "value": 0.003
-          },
-          "guess": {
-            "value": 0.003
-          },
-          "sd_transf": {
-            "value": 0.0
-          }
-        }           
-      }
-    },
+   
 
     "r0": {
       "partition_id": "variable_population", 
