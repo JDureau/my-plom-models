@@ -1,0 +1,14 @@
+{
+  "id": "replicate",
+  "name": "design_sample",
+  "description": "Replicate design.",
+  "H": 8,
+  "seed": "any string you like",
+  "cmd": [
+    {
+      "pipe": "",
+      "algorithm": "kmcmc  -M 40000 -n 100 --full",
+      "repeat": 1
+    }
+  ]
+}
